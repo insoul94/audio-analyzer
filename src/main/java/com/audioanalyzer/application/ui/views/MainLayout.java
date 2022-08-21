@@ -1,9 +1,8 @@
-package com.audioanalyzer.application.views;
+package com.audioanalyzer.application.ui.views;
 
 
-import com.audioanalyzer.application.views.about.AboutView;
-import com.audioanalyzer.application.views.helloworld.HelloWorldView;
-import com.audioanalyzer.application.views.list.ListView;
+import com.audioanalyzer.application.ui.views.about.AboutView;
+import com.audioanalyzer.application.ui.views.main.MainView;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.dependency.NpmPackage;
@@ -98,11 +97,9 @@ public class MainLayout extends AppLayout {
 
     private MenuItemInfo[] createMenuItems() {
         return new MenuItemInfo[]{ //
-                new MenuItemInfo("Hello World", "la la-globe", HelloWorldView.class), //
+                new MenuItemInfo("Hello World", "la la-globe", MainView.class), //
 
                 new MenuItemInfo("About", "la la-file", AboutView.class), //
-
-                new MenuItemInfo("List", "la la-th", ListView.class), //
 
         };
     }

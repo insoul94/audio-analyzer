@@ -1,6 +1,6 @@
-package com.audioanalyzer.application.views.about;
+package com.audioanalyzer.application.ui.views.about;
 
-import com.audioanalyzer.application.views.MainLayout;
+import com.audioanalyzer.application.ui.views.MainLayout;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Paragraph;
