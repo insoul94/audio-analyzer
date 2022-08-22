@@ -1,9 +1,13 @@
 package com.audioanalyzer.application.controller;
 
+import com.audioanalyzer.application.data.AudioParameter;
 import com.audioanalyzer.application.model.Model;
 import com.audioanalyzer.application.ui.views.MainView;
 
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @org.springframework.stereotype.Controller
 public class Controller {
@@ -21,5 +25,9 @@ public class Controller {
 
     public String getCurrentAudioFileName() {
         return model.getCurrentAudioFile().getName();
+    }
+
+    public List<AudioParameter> getAudioParameters() {
+        return new ArrayList<>(model.getAudioParameters().values());
     }
 }

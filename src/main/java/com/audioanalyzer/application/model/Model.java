@@ -1,22 +1,23 @@
 package com.audioanalyzer.application.model;
 
 import com.audioanalyzer.application.data.AudioFile;
+import com.audioanalyzer.application.data.AudioParameter;
+import com.audioanalyzer.application.data.services.AudioFileService;
 import org.springframework.stereotype.Component;
 
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Component
 public class Model {
 
     private AudioFile currentAudioFile;
+    private final AudioFileService audioFileService = new AudioFileService();
 
     //TODO after connecting DB
     public void loadAudioFiles() {
-
-    }
-
-    //TODO after connecting DB
-    public void loadAudioParameters(AudioFile file) {
 
     }
 
@@ -26,9 +27,12 @@ public class Model {
         audioFile.setMimeType(mimeType);
 
         setCurrentAudioFile(audioFile);
+        calculateAudioParameters(audioFile);
     }
 
     public void calculateAudioParameters(AudioFile file) {
+
+        file.setAudioParameters(audioFileService.populateTestData());
 
     }
 
@@ -38,6 +42,9 @@ public class Model {
 
     public void setCurrentAudioFile(AudioFile audioFile) {
         this.currentAudioFile = audioFile;
+    }
 
+    public Map<AudioParameter.Type, AudioParameter> getAudioParameters() {
+        return currentAudioFile.getAudioParameters();
     }
 }

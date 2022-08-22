@@ -11,8 +11,14 @@ public abstract class AudioParameter {
     }
 
     private Object value;
+    private Type type;
 
-//    private Object limit;
+    public AudioParameter(Type type) {
+        this.type = type;
+        this.value = calculate();
+    }
+
+    //    private Object limit;
 
     public Object getValue() {
         return value;
@@ -20,6 +26,10 @@ public abstract class AudioParameter {
 
     public void setValue(Object value) {
         this.value = value;
+    }
+
+    public Type getType() {
+        return type;
     }
 
     public abstract Object calculate();
