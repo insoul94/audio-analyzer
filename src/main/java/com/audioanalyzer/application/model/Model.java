@@ -38,5 +38,6 @@ public class Model {
 
     public void setCurrentAudioFile(AudioFile audioFile) {
         this.currentAudioFile = audioFile;
+
     }
 }

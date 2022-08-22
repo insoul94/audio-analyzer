@@ -1,6 +1,7 @@
 package com.audioanalyzer.application.controller;
 
 import com.audioanalyzer.application.model.Model;
+import com.audioanalyzer.application.ui.views.MainView;
 
 import java.io.InputStream;
 
@@ -15,5 +16,10 @@ public class Controller {
 
     public void onAudioFileUpload(InputStream inputStream, String fileName, long size, String mimeType) {
         model.processAudioFile(inputStream, fileName, size, mimeType);
+        getCurrentAudioFileName();
+    }
+
+    public String getCurrentAudioFileName() {
+        return model.getCurrentAudioFile().getName();
     }
 }
