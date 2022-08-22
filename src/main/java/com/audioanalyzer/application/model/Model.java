@@ -8,6 +8,8 @@ import java.io.InputStream;
 @Component
 public class Model {
 
+    private AudioFile currentAudioFile;
+
     //TODO after connecting DB
     public void loadAudioFiles() {
 
@@ -19,10 +21,22 @@ public class Model {
     }
 
     public void processAudioFile(InputStream inputStream, String fileName, long size, String mimeType) {
+        AudioFile audioFile = new AudioFile(inputStream, fileName);
+        audioFile.setSize(size);
+        audioFile.setMimeType(mimeType);
 
+        setCurrentAudioFile(audioFile);
     }
 
     public void calculateAudioParameters(AudioFile file) {
 
+    }
+
+    public AudioFile getCurrentAudioFile() {
+        return currentAudioFile;
+    }
+
+    public void setCurrentAudioFile(AudioFile audioFile) {
+        this.currentAudioFile = audioFile;
     }
 }

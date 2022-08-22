@@ -29,7 +29,7 @@ public class MainView extends VerticalLayout implements View {
         addClassName("list-view");
         setSizeFull();
 
-        addGrid();
+//        addGrid();
         addUploadForm();
     }
 
@@ -54,9 +54,6 @@ public class MainView extends VerticalLayout implements View {
                     event.getFileName(),
                     event.getContentLength(),
                     event.getMIMEType());
-
-            // Do something with the file data
-            // processFile(fileData, fileName, contentLength, mimeType);
         });
 
         add(singleFileUpload);
