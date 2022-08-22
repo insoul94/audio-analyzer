@@ -1,6 +1,6 @@
-package com.audioanalyzer.application.ui.views.about;
+package com.audioanalyzer.application.ui.views;
 
-import com.audioanalyzer.application.ui.views.MainLayout;
+import com.audioanalyzer.application.controller.Controller;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Paragraph;
@@ -10,9 +10,12 @@ import com.vaadin.flow.router.Route;
 
 @PageTitle("About")
 @Route(value = "about", layout = MainLayout.class)
-public class AboutView extends VerticalLayout {
+public class AboutView extends VerticalLayout implements View {
 
-    public AboutView() {
+    private Controller controller;
+
+    public AboutView(Controller controller) {
+        setController(controller);
         setSpacing(false);
 
         Image img = new Image("images/empty-plant.png", "placeholder plant");
@@ -28,4 +31,8 @@ public class AboutView extends VerticalLayout {
         getStyle().set("text-align", "center");
     }
 
+    @Override
+    public void setController(Controller controller) {
+        this.controller = controller;
+    }
 }

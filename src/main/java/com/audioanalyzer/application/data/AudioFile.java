@@ -1,4 +1,4 @@
-package com.audioanalyzer.application.data.entity;
+package com.audioanalyzer.application.data;
 
 import com.audioanalyzer.application.data.AbstractEntity;
 import com.audioanalyzer.application.data.AudioParameter;

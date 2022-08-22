@@ -1,8 +1,6 @@
 package com.audioanalyzer.application.ui.views;
 
 
-import com.audioanalyzer.application.ui.views.about.AboutView;
-import com.audioanalyzer.application.ui.views.main.MainView;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.dependency.NpmPackage;
