@@ -1,13 +1,11 @@
 package com.audioanalyzer.application.controller;
 
-import com.audioanalyzer.application.data.AudioParameter;
+import com.audioanalyzer.application.data.audioparameters.AudioParameter;
 import com.audioanalyzer.application.model.Model;
-import com.audioanalyzer.application.ui.views.MainView;
 
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @org.springframework.stereotype.Controller
 public class Controller {

@@ -1,6 +1,6 @@
 package com.audioanalyzer.application.data.services;
 
-import com.audioanalyzer.application.data.AudioParameter;
+import com.audioanalyzer.application.data.audioparameters.AudioParameter;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -42,30 +42,30 @@ public class AudioFileService {
 //
     public Map<AudioParameter.Type, AudioParameter> populateTestData() {
         HashMap<AudioParameter.Type, AudioParameter> testParameters = new HashMap<>();
-        testParameters.put(AudioParameter.Type.LUFS, new AudioParameter(AudioParameter.Type.LUFS) {
-            @Override
-            public Object calculate() {
-                return 10;
-            }
-        });
-        testParameters.put(AudioParameter.Type.RMS, new AudioParameter(AudioParameter.Type.RMS) {
-            @Override
-            public Object calculate() {
-                return 20;
-            }
-        });
-        testParameters.put(AudioParameter.Type.NoiseFloor, new AudioParameter(AudioParameter.Type.NoiseFloor) {
-            @Override
-            public Object calculate() {
-                return 30;
-            }
-        });
-        testParameters.put(AudioParameter.Type.PeakLevel, new AudioParameter(AudioParameter.Type.PeakLevel) {
-            @Override
-            public Object calculate() {
-                return 40;
-            }
-        });
+//        testParameters.put(AudioParameter.Type.LUFS, new AudioParameter(AudioParameter.Type.LUFS) {
+//            @Override
+//            public Object calculate() {
+//                return 10;
+//            }
+//        });
+//        testParameters.put(AudioParameter.Type.RMS, new AudioParameter(AudioParameter.Type.RMS) {
+//            @Override
+//            public Object calculate() {
+//                return 20;
+//            }
+//        });
+//        testParameters.put(AudioParameter.Type.NoiseFloor, new AudioParameter(AudioParameter.Type.NoiseFloor) {
+//            @Override
+//            public Object calculate() {
+//                return 30;
+//            }
+//        });
+//        testParameters.put(AudioParameter.Type.PeakLevel, new AudioParameter(AudioParameter.Type.PeakLevel) {
+//            @Override
+//            public Object calculate() {
+//                return 40;
+//            }
+//        });
 
         return testParameters;
     }
