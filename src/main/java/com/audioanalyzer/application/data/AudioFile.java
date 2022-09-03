@@ -16,13 +16,13 @@ public class AudioFile extends AbstractEntity {
 //    @NotEmpty
     private static final Logger LOGGER = Logger.getLogger(AudioFile.class.getName());
     private String name = "";
-    private byte[] data;
+    private InputStream data;
     private long size;
     private String mimeType;
     private Map<AudioParameter.Type, AudioParameter> audioParameters = new HashMap<>();
 
     public AudioFile(InputStream inputStream, String name, long size, String mimeType) {
-        this.data = AudioFile.readFile(inputStream);
+        this.data = inputStream;
         this.name = name;
         this.size = size;
         this.mimeType = mimeType;
@@ -44,7 +44,7 @@ public class AudioFile extends AbstractEntity {
         this.audioParameters = parameters;
     }
 
-    public byte[] getData() {
+    public InputStream getInputStream() {
         return data;
     }
 
@@ -56,7 +56,7 @@ public class AudioFile extends AbstractEntity {
         return mimeType;
     }
 
-    public static byte[] readFile(InputStream inputStream) {
+    public static byte[] readInputStream(InputStream inputStream) {
         try {
             byte[] buffer = inputStream.readAllBytes();
             inputStream.close();

@@ -1,5 +1,7 @@
 package com.audioanalyzer.application.data.audioparameters;
 
+import java.io.InputStream;
+
 public class LUFS extends AudioParameter{
 
     public LUFS() {
@@ -7,6 +9,6 @@ public class LUFS extends AudioParameter{
     }
 
     @Override
-    public void calculate(byte[] data) {
+    public void calculate(InputStream data) {
     }
 }

@@ -1,5 +1,7 @@
 package com.audioanalyzer.application.data.audioparameters;
 
+import java.io.InputStream;
+
 public class PeakLevel extends AudioParameter {
 
     public PeakLevel() {
@@ -7,6 +9,6 @@ public class PeakLevel extends AudioParameter {
     }
 
     @Override
-    public void calculate(byte[] data) {
+    public void calculate(InputStream data) {
     }
 }

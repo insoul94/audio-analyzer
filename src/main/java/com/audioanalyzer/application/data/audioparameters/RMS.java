@@ -1,15 +1,15 @@
 package com.audioanalyzer.application.data.audioparameters;
 
-import be.tarsos.dsp.AudioDispatcher;
-import be.tarsos.dsp.io.jvm.AudioDispatcherFactory;
+import java.io.InputStream;
 
 public class RMS extends AudioParameter {
 
-    public RMS() {
+    public RMS(double value) {
         super(Type.RMS);
+        this.setValue(value);
     }
 
     @Override
-    public void calculate(byte[] data) {
+    public void calculate(InputStream data) {
     }
 }
