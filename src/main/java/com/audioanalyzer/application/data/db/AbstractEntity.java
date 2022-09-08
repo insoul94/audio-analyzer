@@ -1,10 +1,11 @@
-package com.audioanalyzer.application.data;
+package com.audioanalyzer.application.data.db;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
+// TODO: comment out annotations on DB connection stage
 //@MappedSuperclass
 public abstract class AbstractEntity {
 

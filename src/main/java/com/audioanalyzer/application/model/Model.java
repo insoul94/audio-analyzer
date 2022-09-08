@@ -3,7 +3,7 @@ package com.audioanalyzer.application.model;
 import com.audioanalyzer.application.data.AudioFile;
 import com.audioanalyzer.application.data.audioparameters.AudioParameter;
 import com.audioanalyzer.application.data.audioparameters.AudioParameterFactory;
-import com.audioanalyzer.application.data.services.AudioFileService;
+import com.audioanalyzer.application.data.db.AudioFileService;
 import org.springframework.stereotype.Component;
 
 import java.io.InputStream;

@@ -1,6 +1,7 @@
 package com.audioanalyzer.application.data;
 
 import com.audioanalyzer.application.data.audioparameters.AudioParameter;
+import com.audioanalyzer.application.data.db.AbstractEntity;
 
 import java.io.IOException;
 import java.io.InputStream;

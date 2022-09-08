@@ -9,6 +9,6 @@ public class PeakLevel extends AudioParameter {
     }
 
     @Override
-    public void calculate(InputStream data) {
+    public void calculate(int[] data) {
     }
 }

@@ -35,5 +35,5 @@ public abstract class AudioParameter {
         this.value = value;
     }
 
-    public abstract void calculate(InputStream data);
+    public abstract void calculate(int[] data);
 }
