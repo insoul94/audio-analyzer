@@ -1,10 +1,5 @@
 package com.audioanalyzer.application.data.audioparameters;
 
-
-import com.audioanalyzer.application.data.AudioFile;
-
-import java.io.InputStream;
-
 public abstract class AudioParameter {
 
     public enum Type {
@@ -14,16 +9,14 @@ public abstract class AudioParameter {
         LUFS
     }
 
-    private double value;
+    private float value;
     private Type type;
 
     public AudioParameter(Type type) {
         this.type = type;
     }
 
-    //    private Object limit;
-
-    public double getValue() {
+    public float getValue() {
         return value;
     }
 
@@ -31,9 +24,9 @@ public abstract class AudioParameter {
         return type;
     }
 
-    void setValue(double value) {
+    protected void setValue(float value) {
         this.value = value;
     }
 
-    public abstract void calculate(int[] data);
+    public abstract void calculate(float[] data);
 }

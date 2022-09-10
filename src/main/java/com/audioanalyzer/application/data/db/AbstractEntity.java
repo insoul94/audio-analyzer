@@ -1,16 +1,8 @@
 package com.audioanalyzer.application.data.db;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
-
-// TODO: comment out annotations on DB connection stage
-//@MappedSuperclass
+// Parent class for entities to be stored in DB.
 public abstract class AbstractEntity {
 
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     public Long getId() {
@@ -31,10 +23,9 @@ public abstract class AbstractEntity {
 
     @Override
     public boolean equals(Object obj) {
-        if (!(obj instanceof AbstractEntity)) {
+        if (!(obj instanceof AbstractEntity other)) {
             return false; // null or other class
         }
-        AbstractEntity other = (AbstractEntity) obj;
 
         if (id != null) {
             return id.equals(other.id);

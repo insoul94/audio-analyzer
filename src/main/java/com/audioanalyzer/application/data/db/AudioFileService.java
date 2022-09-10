@@ -8,36 +8,28 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 // Stub class
-// TODO: create DB caching AudioParameters connected to an AudioFile
+// This service will provide an access to DB which stores AudioFile IDs and their parameters.
+// TODO: implement
 @Service
 public class AudioFileService {
 
     private static final Logger LOGGER = Logger.getLogger(AudioFileService.class.getName());
 
-    private final AudioFileRepository audioFileRepository;
-
-    public AudioFileService(AudioFileRepository audioFileRepository) {
-        this.audioFileRepository = audioFileRepository;
+    public AudioFileService() {
     }
 
     public List<AudioFile> findAll(String stringFilter) {
-        if (stringFilter == null || stringFilter.isEmpty()) {
-            return audioFileRepository.findAll();
-        } else {
-            return audioFileRepository.search(stringFilter);
-        }
+        return null;
     }
 
     public long count() {
-        return audioFileRepository.count();
+        return 0L;
     }
 
     public void save(AudioFile audioFile) {
         if (audioFile == null) {
             LOGGER.log(Level.SEVERE, "AudioFile is null while saving.");
-            return;
         }
-        audioFileRepository.save(audioFile);
     }
 
 }

@@ -21,8 +21,8 @@ public class Model {
     }
 
     public void processAudioFile(InputStream inputStream, String fileName, long size, String mimeType) {
-        AudioFile audioFile = new AudioFile(inputStream, fileName, size, mimeType);
 
+        AudioFile audioFile = new AudioFile(inputStream, fileName, size, mimeType);
         setCurrentAudioFile(audioFile);
         audioFile.setAudioParameters(AudioParameterFactory.calculateAll(audioFile));
     }

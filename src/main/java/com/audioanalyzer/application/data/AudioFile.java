@@ -1,7 +1,6 @@
 package com.audioanalyzer.application.data;
 
 import com.audioanalyzer.application.data.audioparameters.AudioParameter;
-import com.audioanalyzer.application.data.db.AbstractEntity;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,11 +9,8 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-//@Entity
-public class AudioFile extends AbstractEntity {
+public class AudioFile {
 
-//    @NotNull
-//    @NotEmpty
     private static final Logger LOGGER = Logger.getLogger(AudioFile.class.getName());
     private String name = "";
     private InputStream data;
