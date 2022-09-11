@@ -2,17 +2,11 @@ package com.audioanalyzer.application.data.audioparameters;
 
 public abstract class AudioParameter {
 
-    public enum Type {
-        PeakLevel,
-        NoiseFloor,
-        RMS,
-        LUFS
-    }
-
     private float value;
-    private Type type;
 
-    public AudioParameter(Type type) {
+    private AudioParameterType type;
+
+    public AudioParameter(AudioParameterType type) {
         this.type = type;
     }
 
@@ -20,12 +14,12 @@ public abstract class AudioParameter {
         return value;
     }
 
-    public Type getType() {
-        return type;
-    }
-
     protected void setValue(float value) {
         this.value = value;
+    }
+
+    public AudioParameterType getType() {
+        return type;
     }
 
     public abstract void calculate(float[] data);

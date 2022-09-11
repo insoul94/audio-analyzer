@@ -23,7 +23,9 @@ public class MainView extends VerticalLayout implements View {
     private Controller controller;
 
     H2 currentFileName;
+
     Grid<AudioParameter> grid;
+
     Upload singleFileUpload;
 
     public MainView(Controller controller) {
@@ -32,7 +34,6 @@ public class MainView extends VerticalLayout implements View {
         setSizeFull();
 
         addCurrentFileName();
-//        addGrid();
         addUploadForm();
     }
 

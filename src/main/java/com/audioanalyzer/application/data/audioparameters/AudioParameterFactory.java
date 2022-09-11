@@ -23,7 +23,7 @@ public class AudioParameterFactory {
 
     private static final Logger LOGGER = Logger.getLogger(AudioParameterFactory.class.getName());
 
-    public static Map<AudioParameter.Type, AudioParameter> calculateAll(AudioFile audioFile) {
+    public static Map<AudioParameterType, AudioParameter> calculateAll(AudioFile audioFile) {
 
         float[] audioData;
         if (audioFile != null) {
@@ -32,12 +32,12 @@ public class AudioParameterFactory {
             return null;
         }
 
-        Map<AudioParameter.Type, AudioParameter> parameters = new HashMap<>();
+        Map<AudioParameterType, AudioParameter> parameters = new HashMap<>();
 
-        parameters.put(AudioParameter.Type.RMS, new RMS());
-        parameters.put(AudioParameter.Type.LUFS, new LUFS());
-        parameters.put(AudioParameter.Type.NoiseFloor, new NoiseFloor());
-        parameters.put(AudioParameter.Type.PeakLevel, new PeakLevel());
+        parameters.put(AudioParameterType.RMS, new RMS());
+        parameters.put(AudioParameterType.LUFS, new LUFS());
+        parameters.put(AudioParameterType.NoiseFloor, new NoiseFloor());
+        parameters.put(AudioParameterType.PeakLevel, new PeakLevel());
 
         for (AudioParameter parameter : parameters.values()) {
             parameter.calculate(audioData);

@@ -15,10 +15,7 @@ public class AudioFileService {
 
     private static final Logger LOGGER = Logger.getLogger(AudioFileService.class.getName());
 
-    public AudioFileService() {
-    }
-
-    public List<AudioFile> findAll(String stringFilter) {
+    public List<AudioFile> getAll() {
         return null;
     }
 
@@ -32,4 +29,7 @@ public class AudioFileService {
         }
     }
 
+    public void deleteAll() {
+
+    }
 }

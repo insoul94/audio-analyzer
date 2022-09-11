@@ -2,11 +2,12 @@ package com.audioanalyzer.application.data.audioparameters.impl;
 
 import com.audioanalyzer.application.data.AudioDataUtils;
 import com.audioanalyzer.application.data.audioparameters.AudioParameter;
+import com.audioanalyzer.application.data.audioparameters.AudioParameterType;
 
 public class RMS extends AudioParameter {
 
     public RMS() {
-        super(Type.RMS);
+        super(AudioParameterType.RMS);
     }
 
     @Override
