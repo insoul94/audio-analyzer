@@ -16,8 +16,8 @@ public class Controller {
         this.model = model;
     }
 
-    public void onAudioFileUpload(InputStream inputStream, String fileName, long size, String mimeType) {
-        model.processAudioFile(inputStream, fileName, size, mimeType);
+    public void onAudioFileUpload(InputStream inputStream, String fileName) {
+        model.processAudioFile(inputStream, fileName);
         getCurrentAudioFileName();
     }
 

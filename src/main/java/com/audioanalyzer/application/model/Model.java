@@ -45,10 +45,10 @@ public class Model {
         audioFileService.deleteAll();
     }
 
-    public void processAudioFile(InputStream inputStream, String fileName, long size, String mimeType) {
-
-        AudioFile audioFile = new AudioFile(inputStream, fileName, size, mimeType);
+    public void processAudioFile(InputStream inputStream, String fileName) {
+        AudioFile audioFile = new AudioFile(inputStream, fileName);
         setCurrentAudioFile(audioFile);
+
         audioFile.setAudioParameters(AudioParameterFactory.calculateAll(audioFile));
     }
 

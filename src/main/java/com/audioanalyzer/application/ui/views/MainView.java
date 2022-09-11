@@ -46,7 +46,6 @@ public class MainView extends VerticalLayout implements View {
         currentFileName = new H2("File name");
         Div content = new Div();
         content.add(currentFileName);
-
         add(currentFileName);
     }
 
@@ -58,9 +57,7 @@ public class MainView extends VerticalLayout implements View {
             // Get information about the uploaded file.
             controller.onAudioFileUpload(
                     memoryBuffer.getInputStream(),
-                    event.getFileName(),
-                    event.getContentLength(),
-                    event.getMIMEType());
+                    event.getFileName());
 
             currentFileName.setText(controller.getCurrentAudioFileName());
             setAudioParameters(controller.getAudioParameters());
