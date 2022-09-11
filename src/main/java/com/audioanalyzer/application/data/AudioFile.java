@@ -11,23 +11,15 @@ import java.util.logging.Logger;
 
 public class AudioFile extends AbstractEntity {
 
-    private static final Logger LOGGER = Logger.getLogger(AudioFile.class.getName());
-
     private String name = "";
 
     private InputStream data;
 
-    private long size;
-
-    private String mimeType;
-
     private Map<AudioParameterType, AudioParameter> audioParameters = new HashMap<>();
 
-    public AudioFile(InputStream inputStream, String name, long size, String mimeType) {
+    public AudioFile(InputStream inputStream, String name) {
         this.data = inputStream;
         this.name = name;
-        this.size = size;
-        this.mimeType = mimeType;
     }
 
     public String getName() {
@@ -48,13 +40,5 @@ public class AudioFile extends AbstractEntity {
 
     public InputStream getInputStream() {
         return data;
-    }
-
-    public long getSize() {
-        return size;
-    }
-
-    public String getMimeType() {
-        return mimeType;
     }
 }

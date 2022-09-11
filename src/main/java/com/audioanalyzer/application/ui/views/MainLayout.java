@@ -26,7 +26,9 @@ public class MainLayout extends AppLayout {
         private final Class<? extends Component> view;
 
         public MenuItemInfo(String menuTitle, String iconClass, Class<? extends Component> view) {
+
             this.view = view;
+
             RouterLink link = new RouterLink();
             // Use Lumo classnames for various styling
             link.addClassNames("flex", "h-m", "items-center", "px-s", "relative", "text-secondary");
@@ -86,7 +88,6 @@ public class MainLayout extends AppLayout {
 
         for (MenuItemInfo menuItem : createMenuItems()) {
             list.add(menuItem);
-
         }
 
         header.add(layout, nav);
@@ -95,10 +96,8 @@ public class MainLayout extends AppLayout {
 
     private MenuItemInfo[] createMenuItems() {
         return new MenuItemInfo[]{ //
-                new MenuItemInfo("Analyzer", "la la-globe", MainView.class), //
-
-                new MenuItemInfo("About", "la la-file", AboutView.class), //
-
+                new MenuItemInfo("Analyzer", "la la-globe", MainView.class),
+                new MenuItemInfo("About", "la la-file", AboutView.class),
         };
     }
 

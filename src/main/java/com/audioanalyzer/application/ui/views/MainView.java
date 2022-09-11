@@ -55,7 +55,7 @@ public class MainView extends VerticalLayout implements View {
         singleFileUpload = new Upload(memoryBuffer);
 
         singleFileUpload.addSucceededListener(event -> {
-            // Get information about the uploaded file
+            // Get information about the uploaded file.
             controller.onAudioFileUpload(
                     memoryBuffer.getInputStream(),
                     event.getFileName(),

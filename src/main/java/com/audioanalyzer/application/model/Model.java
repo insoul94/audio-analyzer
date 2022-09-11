@@ -16,20 +16,31 @@ public class Model {
 
     private final AudioFileService audioFileService = new AudioFileService();
 
+    /**
+     * Current AudioFile being just uploaded and processed or selected in UI by user.
+     */
     private AudioFile currentAudioFile;
 
+    /**
+     * Previously processed AudioFiles which are stored in DB for authenticated user.
+     */
     private List<AudioFile> processedAudioFiles;
 
     public Model() {
         loadAudioFiles();
     }
 
-    // Load previously processed and stored AudioFiles for authenticated user.
+
+    /**
+     * Load AudioFiles from DB.
+     */
     public void loadAudioFiles() {
         processedAudioFiles = audioFileService.getAll();
     }
 
-    // Delete all stored AudioFiles for deleted user.
+    /**
+     * Delete all stored AudioFiles for deleted user.
+     */
     public void deleteAudioFiles() {
         audioFileService.deleteAll();
     }
