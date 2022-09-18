@@ -7,6 +7,8 @@ import com.audioanalyzer.application.data.audioparameters.AudioParameterType;
 import com.audioanalyzer.application.data.db.AudioFileService;
 import org.springframework.stereotype.Component;
 
+import javax.sound.sampled.UnsupportedAudioFileException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
@@ -30,7 +32,6 @@ public class Model {
         loadAudioFiles();
     }
 
-
     /**
      * Load AudioFiles from DB.
      */
@@ -45,8 +46,10 @@ public class Model {
         audioFileService.deleteAll();
     }
 
-    public void processAudioFile(InputStream inputStream, String fileName) {
-        AudioFile audioFile = new AudioFile(inputStream, fileName);
+    public void processAudioFile(String fileName, InputStream inputStream)
+            throws UnsupportedAudioFileException, IOException {
+
+        AudioFile audioFile = new AudioFile(fileName, inputStream);
         setCurrentAudioFile(audioFile);
 
         audioFile.setAudioParameters(AudioParameterFactory.calculateAll(audioFile));

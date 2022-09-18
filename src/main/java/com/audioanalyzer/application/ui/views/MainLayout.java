@@ -28,13 +28,14 @@ public class MainLayout extends AppLayout {
         public MenuItemInfo(String menuTitle, String iconClass, Class<? extends Component> view) {
 
             this.view = view;
-
             RouterLink link = new RouterLink();
+
             // Use Lumo classnames for various styling
             link.addClassNames("flex", "h-m", "items-center", "px-s", "relative", "text-secondary");
             link.setRoute(view);
 
             Span text = new Span(menuTitle);
+
             // Use Lumo classnames for various styling
             text.addClassNames("font-medium", "text-s", "whitespace-nowrap");
 
@@ -53,6 +54,7 @@ public class MainLayout extends AppLayout {
         @NpmPackage(value = "line-awesome", version = "1.3.0")
         public static class LineAwesomeIcon extends Span {
             public LineAwesomeIcon(String lineawesomeClassnames) {
+
                 // Use Lumo classnames for suitable font size and margin
                 addClassNames("me-s", "text-l");
                 if (!lineawesomeClassnames.isEmpty()) {
@@ -60,7 +62,6 @@ public class MainLayout extends AppLayout {
                 }
             }
         }
-
     }
 
     public MainLayout() {

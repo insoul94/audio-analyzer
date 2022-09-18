@@ -3,6 +3,8 @@ package com.audioanalyzer.application.controller;
 import com.audioanalyzer.application.data.audioparameters.AudioParameter;
 import com.audioanalyzer.application.model.Model;
 
+import javax.sound.sampled.UnsupportedAudioFileException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,8 +18,10 @@ public class Controller {
         this.model = model;
     }
 
-    public void onAudioFileUpload(InputStream inputStream, String fileName) {
-        model.processAudioFile(inputStream, fileName);
+    public void onAudioFileUpload(String fileName, InputStream inputStream)
+            throws UnsupportedAudioFileException, IOException {
+
+        model.processAudioFile(fileName, inputStream);
         getCurrentAudioFileName();
     }
 

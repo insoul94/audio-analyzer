@@ -7,7 +7,6 @@ import com.audioanalyzer.application.data.db.AbstractEntity;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Logger;
 
 public class AudioFile extends AbstractEntity {
 
@@ -17,9 +16,9 @@ public class AudioFile extends AbstractEntity {
 
     private Map<AudioParameterType, AudioParameter> audioParameters = new HashMap<>();
 
-    public AudioFile(InputStream inputStream, String name) {
-        this.data = inputStream;
+    public AudioFile(String name, InputStream inputStream) {
         this.name = name;
+        this.data = inputStream;
     }
 
     public String getName() {

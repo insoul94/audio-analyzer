@@ -12,13 +12,19 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouteAlias;
 
+import javax.sound.sampled.UnsupportedAudioFileException;
+import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @PageTitle("Main")
 @Route(value = "main", layout = MainLayout.class)
 @RouteAlias(value = "", layout = MainLayout.class)
 
 public class MainView extends VerticalLayout implements View {
+
+    private static final Logger LOGGER = Logger.getLogger(MainView.class.getName());
 
     private Controller controller;
 
@@ -54,13 +60,31 @@ public class MainView extends VerticalLayout implements View {
         singleFileUpload = new Upload(memoryBuffer);
 
         singleFileUpload.addSucceededListener(event -> {
-            // Get information about the uploaded file.
-            controller.onAudioFileUpload(
-                    memoryBuffer.getInputStream(),
-                    event.getFileName());
+
+            try {
+                controller.onAudioFileUpload(event.getFileName(), memoryBuffer.getInputStream());
+
+            } catch (UnsupportedAudioFileException e) {
+                LOGGER.log(Level.SEVERE,
+                        "The file's stream does not point to a valid audio data recognized by the system." + e);
+                showErrorMessage("Cannot recognize audio data");
+
+            } catch (IOException e) {
+                LOGGER.log(Level.SEVERE,
+                        "Error while reading from InputStream." + e);
+                showErrorMessage("Error while reading the file.");
+            }
 
             currentFileName.setText(controller.getCurrentAudioFileName());
             setAudioParameters(controller.getAudioParameters());
+        });
+
+        singleFileUpload.addFailedListener(event -> {
+            System.out.println("FAILED :" + event.getReason());
+        });
+
+        singleFileUpload.addFileRejectedListener(event -> {
+            System.out.println("FAILED REJECTED :" + event.getErrorMessage());
         });
 
         add(singleFileUpload);
@@ -77,5 +101,10 @@ public class MainView extends VerticalLayout implements View {
         }
 
         grid.setItems(audioParameters);
+    }
+
+    private void showErrorMessage(String msg) {
+        // TODO: show user friendly msg in a form
+        // Configure Upload element to show error in a native Vaadin way
     }
 }

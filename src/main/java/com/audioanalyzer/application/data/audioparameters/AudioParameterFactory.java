@@ -16,14 +16,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class AudioParameterFactory {
 
-    private static final Logger LOGGER = Logger.getLogger(AudioParameterFactory.class.getName());
+    private AudioParameterFactory() {
+    }
 
-    public static Map<AudioParameterType, AudioParameter> calculateAll(AudioFile audioFile) {
+    public static Map<AudioParameterType, AudioParameter> calculateAll(AudioFile audioFile)
+            throws UnsupportedAudioFileException, IOException {
 
         float[] audioData;
         if (audioFile != null) {
@@ -46,18 +46,17 @@ public class AudioParameterFactory {
         return parameters;
     }
 
-    // Extract audio data from AudioInputStream byte array, parse Endian value into int, then into
-    // relative float value (range -1.0:1.0)
-    static float[] prepareAudioData(AudioFile audioFile) {
+    // Extract audio data from AudioInputStream byte array stored in AudioFile, parse Endian value into int,
+    // then into relative float value (range -1.0:1.0)
+    public static float[] prepareAudioData(AudioFile audioFile) throws UnsupportedAudioFileException, IOException {
 
         // TODO: enable MP3 support and other formats than WAV
         // Construct AudioInputStream specifically for audio data which includes file headers.
         try (AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(audioFile.getInputStream())) {
-            AudioFormat format = audioInputStream.getFormat();
 
+            AudioFormat format = audioInputStream.getFormat();
             boolean isBigEndian = format.isBigEndian();
             int bitrate = format.getSampleSizeInBits();
-
             byte[] audioDataBytes = readData(audioInputStream);
 
             // Sample size in bytes. (16-bit PCM - 2 bytes, 24-bit PCM - 3 bytes, etc.)
@@ -113,17 +112,10 @@ public class AudioParameterFactory {
             }
 
             return samplesRelative;
-
-        } catch (UnsupportedAudioFileException e) {
-            LOGGER.log(Level.SEVERE, "UnsupportedAudioFileException in AudioSystem.getAudioInputStream(): " + e.getMessage());
-            return null;
-        } catch (IOException e) {
-            LOGGER.log(Level.SEVERE, "IOException in AudioSystem.getAudioInputStream: " + e.getMessage());
-            return null;
         }
     }
 
-    private static byte[] readData(InputStream is) {
+    private static byte[] readData(InputStream is) throws IOException {
 
         int nRead;
         byte[] data = new byte[1024*8];
@@ -135,9 +127,6 @@ public class AudioParameterFactory {
             }
             return buffer.toByteArray();
 
-        } catch (IOException e) {
-            LOGGER.log(Level.SEVERE, "IOException in readData() read/write: " + e.getMessage());
-            return null;
         }
     }
 }
