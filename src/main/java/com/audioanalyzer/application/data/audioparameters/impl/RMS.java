@@ -12,7 +12,7 @@ public class RMS extends AudioParameter {
     }
 
     @Override
-    public void calculate(float[] data) {
+    public float calculate(float[] data) {
 
         double sum = 0;
         for (int i = 0; i < data.length - 1; i++) {
@@ -21,6 +21,7 @@ public class RMS extends AudioParameter {
 
         double rms = Math.sqrt(sum / data.length);
         rms = AudioDataHelper.linearToDecibel(rms);
-        this.setValue((float) rms);
+
+        return (float) rms;
     }
 }

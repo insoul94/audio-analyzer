@@ -43,11 +43,11 @@ public class AudioDataHelper {
 
     // Extract audio data from AudioInputStream byte array stored in AudioFile, parse Endian value into int,
     // then into relative float value (range -1.0:1.0)
-    public static float[] prepareAudioData(AudioFile audioFile) throws UnsupportedAudioFileException, IOException {
+    public static float[] prepareAudioData(InputStream inputStream) throws UnsupportedAudioFileException, IOException {
 
         // TODO: enable MP3 support and other formats than WAV
         // Construct AudioInputStream specifically for audio data which includes file headers.
-        try (AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(audioFile.getInputStream())) {
+        try (AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(inputStream)) {
 
             AudioFormat format = audioInputStream.getFormat();
             boolean isBigEndian = format.isBigEndian();

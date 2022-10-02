@@ -11,7 +11,8 @@ public class LUFS extends AudioParameter {
     }
 
     @Override
-    public void calculate(float[] data) {
+    public float calculate(float[] data) {
         // TODO: implement
+        return 0f;
     }
 }

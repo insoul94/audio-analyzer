@@ -1,7 +1,8 @@
 package com.audioanalyzer.application.data.audioparameters;
 
 import com.audioanalyzer.application.data.AudioFile;
-import org.apache.commons.lang3.Validate;
+
+import java.util.Objects;
 
 public abstract class AudioParameter {
 
@@ -12,8 +13,9 @@ public abstract class AudioParameter {
     private final AudioFile source;
 
     public AudioParameter(AudioParameterType type, AudioFile source) {
-        this.type = Validate.notNull(type, "AudioParameterType should not be null");
-        this.source = Validate.notNull(source, "Source AufioFile should not be null");
+        this.type = Objects.requireNonNull(type, "type must not be null");
+        this.source = Objects.requireNonNull(source, "source must not be null");
+        this.value = calculate(source.getData());
     }
 
     public final float getValue() {
@@ -32,5 +34,5 @@ public abstract class AudioParameter {
         return source;
     }
 
-    public abstract void calculate(float[] data);
+    public abstract float calculate(float[] data);
 }

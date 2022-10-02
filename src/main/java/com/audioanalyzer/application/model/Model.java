@@ -52,7 +52,7 @@ public class Model {
         AudioFile audioFile = new AudioFile(fileName, inputStream);
         setCurrentAudioFile(audioFile);
 
-        audioFile.setAudioParameters(AudioParameterFactory.calculateAll(audioFile));
+        audioFile.setAudioParameters(AudioParameterFactory.provideAll(audioFile));
     }
 
     public AudioFile getCurrentAudioFile() {
