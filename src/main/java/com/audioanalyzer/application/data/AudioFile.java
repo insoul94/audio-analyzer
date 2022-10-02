@@ -2,13 +2,12 @@ package com.audioanalyzer.application.data;
 
 import com.audioanalyzer.application.data.audioparameters.AudioParameter;
 import com.audioanalyzer.application.data.audioparameters.AudioParameterType;
-import com.audioanalyzer.application.data.db.AbstractEntity;
 
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AudioFile extends AbstractEntity {
+public class AudioFile {
 
     private String name = "";
 

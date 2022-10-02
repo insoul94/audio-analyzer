@@ -1,13 +1,14 @@
 package com.audioanalyzer.application.data.audioparameters.impl;
 
-import com.audioanalyzer.application.data.AudioDataUtils;
+import com.audioanalyzer.application.data.AudioDataHelper;
+import com.audioanalyzer.application.data.AudioFile;
 import com.audioanalyzer.application.data.audioparameters.AudioParameter;
 import com.audioanalyzer.application.data.audioparameters.AudioParameterType;
 
 public class RMS extends AudioParameter {
 
-    public RMS() {
-        super(AudioParameterType.RMS);
+    public RMS(AudioFile source) {
+        super(AudioParameterType.RMS, source);
     }
 
     @Override
@@ -19,7 +20,7 @@ public class RMS extends AudioParameter {
         }
 
         double rms = Math.sqrt(sum / data.length);
-        rms = AudioDataUtils.linearToDecibel(rms);
+        rms = AudioDataHelper.linearToDecibel(rms);
         this.setValue((float) rms);
     }
 }
