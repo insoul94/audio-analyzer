@@ -2,11 +2,11 @@ package com.audioanalyzer.application.model;
 
 import com.audioanalyzer.application.data.AudioFile;
 import com.audioanalyzer.application.data.audioparameters.AudioParameter;
-import com.audioanalyzer.application.data.audioparameters.AudioParameterFactory;
 import com.audioanalyzer.application.data.audioparameters.AudioParameterType;
 import com.audioanalyzer.application.data.db.AudioFileService;
 import org.springframework.stereotype.Component;
 
+import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -49,10 +49,10 @@ public class Model {
     public void processAudioFile(String fileName, InputStream inputStream)
             throws UnsupportedAudioFileException, IOException {
 
-        AudioFile audioFile = new AudioFile(fileName, inputStream);
-        setCurrentAudioFile(audioFile);
+        AudioFile audioFile = new AudioFile(fileName, AudioSystem.getAudioInputStream(inputStream));
 
-        audioFile.setAudioParameters(AudioParameterFactory.provideAll(audioFile));
+        setCurrentAudioFile(audioFile);
+        audioFile.calculateAudioParameters();
     }
 
     public AudioFile getCurrentAudioFile() {

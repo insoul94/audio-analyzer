@@ -1,11 +1,12 @@
 package com.audioanalyzer.application.data;
 
 import com.audioanalyzer.application.data.audioparameters.AudioParameter;
+import com.audioanalyzer.application.data.audioparameters.AudioParameterFactory;
 import com.audioanalyzer.application.data.audioparameters.AudioParameterType;
 
+import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -15,24 +16,26 @@ public class AudioFile {
     private final String name;
 
     // TODO: initialize as AudioInputStream
-    private final InputStream inputStream;
+    private final AudioInputStream audioInputStream;
 
     private final float[] data;
 
-    private Map<AudioParameterType, AudioParameter> audioParameters = new HashMap<>();
+    private Map<AudioParameterType, AudioParameter> audioParameters;
 
-    public AudioFile(String name, InputStream inputStream) throws UnsupportedAudioFileException, IOException {
+    public AudioFile(String name, AudioInputStream audioInputStream)
+            throws UnsupportedAudioFileException, IOException {
+
         this.name = Objects.requireNonNull(name, "name must not be null");
-        this.inputStream = Objects.requireNonNull(inputStream, "inputStream must not be null");
-        this.data = Objects.requireNonNull(AudioDataHelper.prepareAudioData(this.inputStream));
+        this.audioInputStream = Objects.requireNonNull(audioInputStream, "audioInputStream must not be null");
+        this.data = Objects.requireNonNull(AudioDataHelper.prepareAudioData(this.audioInputStream));
     }
 
     public String getName() {
         return name;
     }
 
-    public InputStream getInputStream() {
-        return inputStream;
+    public AudioInputStream getAudioInputStream() {
+        return audioInputStream;
     }
 
     public float[] getData() {
@@ -40,10 +43,16 @@ public class AudioFile {
     }
 
     public Map<AudioParameterType, AudioParameter> getAudioParameters() {
+        if (audioParameters == null)
+            audioParameters = new HashMap<>();
         return audioParameters;
     }
 
-    public void setAudioParameters(Map<AudioParameterType, AudioParameter> parameters) {
-        this.audioParameters = parameters;
+    public void setAudioParameters(Map<AudioParameterType, AudioParameter> audioParameters) {
+        this.audioParameters = audioParameters;
+    }
+
+    public void calculateAudioParameters() {
+        setAudioParameters(AudioParameterFactory.calculateAll(getData()));
     }
 }
