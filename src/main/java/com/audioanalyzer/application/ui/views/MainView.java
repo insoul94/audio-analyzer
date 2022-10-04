@@ -104,7 +104,6 @@ public class MainView extends VerticalLayout implements View {
     }
 
     private void showErrorMessage(String msg) {
-        // TODO: show user friendly msg in a form
         // Configure Upload element to show error in a native Vaadin way
     }
 }

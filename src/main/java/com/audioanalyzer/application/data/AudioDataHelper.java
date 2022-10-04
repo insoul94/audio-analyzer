@@ -2,13 +2,15 @@ package com.audioanalyzer.application.data;
 
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class AudioDataHelper {
+
+    private static final Logger LOGGER = Logger.getLogger(AudioDataHelper.class.getName());
 
     private AudioDataHelper() {}
 
@@ -23,7 +25,10 @@ public class AudioDataHelper {
     }
 
     public static double linearToDecibel(double linear) {
-        return (20 * Math.log10(linear));
+        if (linear < 0)
+            LOGGER.log(Level.WARNING, "linear value is negative :: linearToDecibel(): " + linear);
+
+        return (20 * Math.log10(Math.abs(linear)));
     }
 
     public static byte[] readData(InputStream is) throws IOException {
@@ -37,76 +42,67 @@ public class AudioDataHelper {
                 buffer.write(data, 0, nRead);
             }
             return buffer.toByteArray();
-
         }
     }
 
     // Extract audio data from AudioInputStream byte array stored in AudioFile, parse Endian value into int,
     // then into relative float value (range -1.0:1.0)
-    public static float[] prepareAudioData(InputStream inputStream) throws UnsupportedAudioFileException, IOException {
+    public static float[] prepareAudioData(AudioInputStream audioInputStream) throws IOException {
 
-        // TODO: enable MP3 support and other formats than WAV
-        // Construct AudioInputStream specifically for audio data which includes file headers.
-        try (AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(inputStream)) {
+        AudioFormat format = audioInputStream.getFormat();
+        boolean isBigEndian = format.isBigEndian();
+        int bitrate = format.getSampleSizeInBits();
+        byte[] audioDataBytes = readData(audioInputStream);
 
-            AudioFormat format = audioInputStream.getFormat();
-            boolean isBigEndian = format.isBigEndian();
-            int bitrate = format.getSampleSizeInBits();
-            byte[] audioDataBytes = readData(audioInputStream);
+        // Single sample size in bytes. (16-bit PCM - 2 bytes, 24-bit PCM - 3 bytes, etc.)
+        int ss = bitrate / Byte.SIZE;
 
-            // Sample size in bytes. (16-bit PCM - 2 bytes, 24-bit PCM - 3 bytes, etc.)
-            int sampleSize = bitrate / Byte.SIZE;
+        // Length of new array of full sample values has to match actual amount of samples read.
+        // This is to protect from erroneous odd length of bytes array.
+        int samplesLength = audioDataBytes.length % ss == 0 ?
+                audioDataBytes.length / ss :
+                audioDataBytes.length / ss + 1;
 
-            // Length of new array of full sample values has to match actual amount of samples read.
-            int samplesLength = audioDataBytes.length % sampleSize == 0 ?
-                    audioDataBytes.length / sampleSize :
-                    audioDataBytes.length / sampleSize + 1;
+        int[] samples = new int[samplesLength];
 
-            int[] samples = new int[samplesLength];
+        // Array of relative amplitude values (from -1.0 to 1.0).
+        float[] samplesRelative = new float[samplesLength];
 
-            // Array of relative sample amplitude values (from -1.0 to 1.0).
-            float[] samplesRelative = new float[samplesLength];
-            int maxValue = (int) Math.pow(2, bitrate);
+        // Has to be divided by 2 to take into account zero-axis shift: maxValue = [-max/2 : +max/2]
+        int maxValue = (int) Math.pow(2, bitrate) / 2;
 
-            // Validation code:
-            // java.nio.ShortBuffer shortBuffer = java.nio.ByteBuffer.wrap(audioDataBytes).order(java.nio.ByteOrder.LITTLE_ENDIAN).asShortBuffer();
+        int b = 0;
+        for (int i = 0; i <= audioDataBytes.length - ss; i += ss) {
+            for (int j = 0; j < ss; j++) {
 
-            int n = 0;
-            if (!isBigEndian) {
-                for (int i = 0; i <= audioDataBytes.length - sampleSize; i += sampleSize) {
-                    for (int j = 0; j < sampleSize; j++) {
+                if (!isBigEndian) {
 
-                        // Shift byte according to Little Endian order
-                        n = audioDataBytes[i + j] << j * 8;
+                    // Shift byte to its original place according to Little Endian order
+                    b = (int) audioDataBytes[i + j] << j * 8;
 
-                        // If MSB, preserve negativeness, if not MSB - use window to keep byte and zero out the rest
-                        if (j != sampleSize - 1) {
-                            n &= n & (0xFF << j * 8);
-                        }
-
-                        samples[i / sampleSize] |= n;
+                    // If MSB, preserve negativeness, if not MSB - use window to keep byte and dump the rest
+                    if (j != ss - 1) {
+                        b &= 0x000000FF << j * 8;
                     }
 
-                    samplesRelative[i / sampleSize] = samples[i / sampleSize] * 1.0f / maxValue;
-                }
-
-            } else {
-
-                // TODO: check correctness
-                for (int i = 0; i <= audioDataBytes.length - sampleSize; i += sampleSize) {
-                    for (int j = 0; j < sampleSize; j++) {
-                        n = audioDataBytes[i + j] << (sampleSize - 1 - j) * 8;
-                        samples[i / sampleSize] |= n;
+                } else {
+                    b = (int) audioDataBytes[i + j] << (ss - 1 - j) * 8;
+                    if (j != 0) {
+                        b &= 0xFF000000 >> j * 8;
                     }
                 }
-            }
 
-            // TODO: add support for more channels
-            if (format.getChannels() == 2) {
-                samplesRelative = stereoToMono(samplesRelative);
+                // Append byte to a resulting integer
+                samples[i / ss] |= b;
             }
-
-            return samplesRelative;
+            samplesRelative[i / ss] = samples[i / ss] * 1.0f / maxValue;
         }
+
+        if (format.getChannels() == 2) {
+            samplesRelative = stereoToMono(samplesRelative);
+        }
+
+        return samplesRelative;
+
     }
 }
