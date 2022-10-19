@@ -48,9 +48,7 @@ public class Model {
 
     public void processAudioFile(String fileName, InputStream inputStream)
             throws UnsupportedAudioFileException, IOException {
-
         AudioFile audioFile = new AudioFile(fileName, AudioSystem.getAudioInputStream(inputStream));
-
         setCurrentAudioFile(audioFile);
         audioFile.calculateAudioParameters();
     }

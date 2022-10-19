@@ -20,7 +20,6 @@ public class Controller {
 
     public void onAudioFileUpload(String fileName, InputStream inputStream)
             throws UnsupportedAudioFileException, IOException {
-
         model.processAudioFile(fileName, inputStream);
         getCurrentAudioFileName();
     }

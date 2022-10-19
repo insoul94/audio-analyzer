@@ -38,7 +38,6 @@ public class MainView extends VerticalLayout implements View {
         setController(controller);
         addClassName("list-view");
         setSizeFull();
-
         addCurrentFileName();
         addUploadForm();
     }
@@ -58,48 +57,37 @@ public class MainView extends VerticalLayout implements View {
     private void addUploadForm() {
         MemoryBuffer memoryBuffer = new MemoryBuffer();
         singleFileUpload = new Upload(memoryBuffer);
-
         singleFileUpload.addSucceededListener(event -> {
-
             try {
                 controller.onAudioFileUpload(event.getFileName(), memoryBuffer.getInputStream());
-
             } catch (UnsupportedAudioFileException e) {
                 LOGGER.log(Level.SEVERE,
                         "The file's stream does not point to a valid audio data recognized by the system." + e);
                 showErrorMessage("Cannot recognize audio data");
-
             } catch (IOException e) {
                 LOGGER.log(Level.SEVERE,
                         "Error while reading from InputStream." + e);
                 showErrorMessage("Error while reading the file.");
             }
-
             currentFileName.setText(controller.getCurrentAudioFileName());
             setAudioParameters(controller.getAudioParameters());
         });
-
         singleFileUpload.addFailedListener(event -> {
             System.out.println("FAILED :" + event.getReason());
         });
-
         singleFileUpload.addFileRejectedListener(event -> {
             System.out.println("FAILED REJECTED :" + event.getErrorMessage());
         });
-
         add(singleFileUpload);
     }
 
     private void setAudioParameters(List<AudioParameter> audioParameters) {
         if (grid == null) {
-
             grid = new Grid<>(AudioParameter.class, false);
             grid.addColumn(AudioParameter::getType).setHeader("Type");
             grid.addColumn(AudioParameter::getValue).setHeader("Value");
-
             add(grid);
         }
-
         grid.setItems(audioParameters);
     }
 

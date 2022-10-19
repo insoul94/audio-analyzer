@@ -47,7 +47,6 @@ public class AudioDataHelper {
         boolean isBigEndian = format.isBigEndian();
         int bitrate = format.getSampleSizeInBits();
         byte[] audioDataBytes = readData(audioInputStream);
-
         // Single sample size in bytes. (16-bit PCM - 2 bytes, 24-bit PCM - 3 bytes, etc.)
         int ss = bitrate / Byte.SIZE;
         // Length of new array of full sample values has to match actual amount of samples read.
@@ -82,11 +81,9 @@ public class AudioDataHelper {
             }
             samplesRelative[i / ss] = samples[i / ss] * 1.0f / maxValue;
         }
-
         if (format.getChannels() == 2) {
             samplesRelative = stereoToMono(samplesRelative);
         }
-
         return samplesRelative;
     }
 

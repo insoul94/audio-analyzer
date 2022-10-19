@@ -23,14 +23,11 @@ public class AboutView extends VerticalLayout implements View {
 
     protected void init() {
         setSpacing(false);
-
         Image img = new Image("images/empty-plant.png", "placeholder plant");
         img.setWidth("200px");
         add(img);
-
         add(new H2("Header 2"));
         add(new Paragraph("Placeholder to extend UI 🤗"));
-
         setSizeFull();
         setJustifyContentMode(JustifyContentMode.CENTER);
         setDefaultHorizontalComponentAlignment(Alignment.CENTER);

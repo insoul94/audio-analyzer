@@ -14,15 +14,12 @@ public class AudioParameterFactory {
     }
 
     public static Map<AudioParameterType, AudioParameter> calculateAll(float[] data) {
-
         Map<AudioParameterType, AudioParameter> audioParameters = new HashMap<>();
-
         for (AudioParameterType type : AudioParameterType.values()) {
             AudioParameter param = provide(type);
             param.setValue(param.calculate(data));
             audioParameters.put(type, param);
         }
-
         return audioParameters;
     }
 
