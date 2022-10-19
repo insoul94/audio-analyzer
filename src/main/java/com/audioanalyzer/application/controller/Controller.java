@@ -1,6 +1,6 @@
 package com.audioanalyzer.application.controller;
 
-import com.audioanalyzer.application.data.audioparameters.AudioParameter;
+import com.audioanalyzer.application.data.audioparameter.AudioParameter;
 import com.audioanalyzer.application.model.Model;
 
 import javax.sound.sampled.UnsupportedAudioFileException;

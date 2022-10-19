@@ -1,7 +1,7 @@
-package com.audioanalyzer.application.data.audioparameters.impl;
+package com.audioanalyzer.application.data.audioparameter.impl;
 
-import com.audioanalyzer.application.data.audioparameters.AudioParameter;
-import com.audioanalyzer.application.data.audioparameters.AudioParameterType;
+import com.audioanalyzer.application.data.audioparameter.AudioParameter;
+import com.audioanalyzer.application.data.audioparameter.AudioParameterType;
 
 public class PeakLevel extends AudioParameter {
 

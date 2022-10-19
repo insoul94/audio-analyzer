@@ -1,8 +1,9 @@
-package com.audioanalyzer.application.data;
+package com.audioanalyzer.application.data.audiofile;
 
-import com.audioanalyzer.application.data.audioparameters.AudioParameter;
-import com.audioanalyzer.application.data.audioparameters.AudioParameterFactory;
-import com.audioanalyzer.application.data.audioparameters.AudioParameterType;
+import com.audioanalyzer.application.data.helper.AudioDataHelper;
+import com.audioanalyzer.application.data.audioparameter.AudioParameter;
+import com.audioanalyzer.application.data.audioparameter.AudioParameterFactory;
+import com.audioanalyzer.application.data.audioparameter.AudioParameterType;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.UnsupportedAudioFileException;

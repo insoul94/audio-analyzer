@@ -1,9 +1,9 @@
 package com.audioanalyzer.application.model;
 
-import com.audioanalyzer.application.data.AudioFile;
-import com.audioanalyzer.application.data.audioparameters.AudioParameter;
-import com.audioanalyzer.application.data.audioparameters.AudioParameterType;
-import com.audioanalyzer.application.data.db.AudioFileService;
+import com.audioanalyzer.application.data.audiofile.AudioFile;
+import com.audioanalyzer.application.data.audioparameter.AudioParameter;
+import com.audioanalyzer.application.data.audioparameter.AudioParameterType;
+import com.audioanalyzer.application.data.db.service.AudioFileService;
 import org.springframework.stereotype.Component;
 
 import javax.sound.sampled.AudioSystem;
@@ -16,7 +16,7 @@ import java.util.Map;
 @Component
 public class Model {
 
-    private final AudioFileService audioFileService = new AudioFileService();
+    private final AudioFileService audioFileService;
 
     /**
      * Current AudioFile being just uploaded and processed or selected in UI by user.
@@ -24,19 +24,23 @@ public class Model {
     private AudioFile currentAudioFile;
 
     /**
-     * Previously processed AudioFiles which are stored in DB for authenticated user.
+     * History of  processed AudioFiles which are stored in DB for authenticated user.
      */
     private List<AudioFile> processedAudioFiles;
 
-    public Model() {
-        loadAudioFiles();
+    public Model(AudioFileService audioFileService) {
+        this.audioFileService = audioFileService;
     }
 
     /**
-     * Load AudioFiles from DB.
+     * Load history processed AudioFiles from DB.
      */
     public void loadAudioFiles() {
         processedAudioFiles = audioFileService.getAll();
+    }
+
+    public void deleteAudioFile(AudioFile audioFile) {
+        audioFileService.delete(audioFile);
     }
 
     /**

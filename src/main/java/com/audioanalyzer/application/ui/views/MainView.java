@@ -1,7 +1,7 @@
 package com.audioanalyzer.application.ui.views;
 
 import com.audioanalyzer.application.controller.Controller;
-import com.audioanalyzer.application.data.audioparameters.AudioParameter;
+import com.audioanalyzer.application.data.audioparameter.AudioParameter;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H2;

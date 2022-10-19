@@ -1,4 +1,4 @@
-package com.audioanalyzer.application.data.audioparameters;
+package com.audioanalyzer.application.data.audioparameter;
 
 public enum AudioParameterType {
     PeakLevel,

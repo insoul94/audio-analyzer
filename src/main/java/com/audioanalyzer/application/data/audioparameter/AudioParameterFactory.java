@@ -1,9 +1,9 @@
-package com.audioanalyzer.application.data.audioparameters;
+package com.audioanalyzer.application.data.audioparameter;
 
-import com.audioanalyzer.application.data.audioparameters.impl.LUFS;
-import com.audioanalyzer.application.data.audioparameters.impl.NoiseFloor;
-import com.audioanalyzer.application.data.audioparameters.impl.PeakLevel;
-import com.audioanalyzer.application.data.audioparameters.impl.RMS;
+import com.audioanalyzer.application.data.audioparameter.impl.LUFS;
+import com.audioanalyzer.application.data.audioparameter.impl.NoiseFloor;
+import com.audioanalyzer.application.data.audioparameter.impl.PeakLevel;
+import com.audioanalyzer.application.data.audioparameter.impl.RMS;
 
 import java.util.HashMap;
 import java.util.Map;

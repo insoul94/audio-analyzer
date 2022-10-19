@@ -1,4 +1,4 @@
-package com.audioanalyzer.application.data;
+package com.audioanalyzer.application.data.helper;
 
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
